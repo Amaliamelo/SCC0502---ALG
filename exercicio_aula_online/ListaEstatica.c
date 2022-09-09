@@ -14,24 +14,25 @@ int Insere(TipoLista *L, TipoItem I){
     }
 
     L->ultimo++; //passandoo ultimo pra frente
-    L->Itens[L->ultimo]= I //inserindo item na posição ultimo
+    L->itens[L->ultimo]= I; //inserindo item na posição ultimo
 }
 
-int Remove(TipoLista *L, TipoChave C){
-    RemovePosicao(L, Pesquisa(L,C));
-}
 
 static int RemovePosicao(TipoLista *L, TipoApontador P){
     TipoApontador a;
     if(P < 0 || P >= L->ultimo){
         printf("Posicao Invalida\n");
-        return POSICAO_INVALIDA;
+        return POS_INVALIDA;
     }
     for(a = P;a < L->ultimo; a++){
         //fazendo uma copia dos elementos da frente do que sera removido
         L->itens[a]=L->itens[a+1];
     }
     L->ultimo--;
+}
+
+int Remove(TipoLista *L, TipoChave C){
+    RemovePosicao(L, Pesquisa(L,C));
 }
 
 TipoApontador Pesquisa(TipoLista *L, TipoChave C){
@@ -48,7 +49,7 @@ TipoApontador Pesquisa(TipoLista *L, TipoChave C){
 
 char ListaVazia(TipoLista *L){
     //verificando se o ponteiro está com -1, lista só criada
-    return L->ultimo == -1
+    return L->ultimo == -1;
 }
 char ListaCheia (TipoLista *L){
     //verificando se o ponteiro esta apontando para o tamanha máximo
@@ -59,7 +60,7 @@ void ImprimeLista(TipoLista *L){
     TipoApontador a;
     printf("Lista:");
     for(a=0; a<=L->ultimo; a++){
-        printf("%d ", L->itens[a].chave)
+        printf("%d ", L->itens[a].chave);
     }
     printf("\n\n");
 }
