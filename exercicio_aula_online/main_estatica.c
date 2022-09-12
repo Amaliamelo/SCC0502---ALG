@@ -1,14 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "ListaDinamica.h"
-
+#include "ListaEstatica.h"
 
 int main() {    
     TipoLista L;
     TipoItem item;
-    TipoApontador p;
 
-    CriaLista(L);
+    CriaLista(&L);
 
 	printf("Lista vazia? %d\n", ListaVazia(&L));
 	
@@ -44,14 +42,6 @@ int main() {
 	
 	ImprimeLista(&L);
 
-    p=L.primeiro;
-
-    while(p!=NULL){
-        L.primeiro = p->prox;
-        printf("Limpando\n");
-        free(p);
-        p=L.primeiro;
-    }
 
 	return 0;
 }
