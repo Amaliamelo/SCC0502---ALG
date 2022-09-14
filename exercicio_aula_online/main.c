@@ -8,7 +8,7 @@ int main() {
     TipoItem item;
     TipoApontador p;
 
-    CriaLista(L);
+    CriaLista(&L);
 
 	printf("Lista vazia? %d\n", ListaVazia(&L));
 	

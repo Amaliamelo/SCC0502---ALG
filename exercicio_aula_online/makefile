@@ -2,11 +2,14 @@ CC=gcc
 CFLAGS=-Wall
 objects = main.o ListaEstatica.o
 
-lista1 : $(objects)
-	$(CC) -o lista2 $(objects)
-
-main.o : ListaEstatica.h
-ListaEstatica.o : ListaEstatica.h
-
-clean :
-	rm lista2 $(objects)
+executa: main
+	./main
+	
+main: ListaEstatica.o main_estatica.c
+	$(CC) -o main ListaEstatica.o main_estatica.c
+	
+Lista.o: ListaEstatica.c ListaEstatica.h
+	$(CC) -c ListaEstatica.c
+	
+clean:
+	rm main $(objects)

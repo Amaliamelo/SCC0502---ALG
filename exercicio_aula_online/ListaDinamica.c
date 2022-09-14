@@ -1,6 +1,6 @@
-#include "ListaDinamica.h"
 #include<stdio.h>
 #include<stdlib.h>
+#include "ListaDinamica.h"
 
 void CriaLista(TipoLista *L){
 	(*L).ultimo = NULL;    
@@ -101,7 +101,6 @@ TipoApontador Pesquisa(TipoLista *L, TipoChave C){
 char ListaVazia(TipoLista *L){// verificar se o ultimo e o primeiro apontam para null
     return L->ultimo == NULL && L->primeiro==NULL;
 }
-char ListaCheia (TipoLista *L);
 
 void ImprimeLista(TipoLista *L){
     TipoApontador p = L->primeiro;
