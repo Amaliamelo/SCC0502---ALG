@@ -92,7 +92,8 @@ TipoApontador Pesquisa(TipoLista *L, TipoChave C){
         if(p->item.chave==C){
             return p;
         }
-        p=p->prox;
+
+        p=p->proximo;
     }
 
     return p;
