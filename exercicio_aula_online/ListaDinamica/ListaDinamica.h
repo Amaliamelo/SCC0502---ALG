@@ -27,8 +27,8 @@ typedef struct{
 }TipoLista;
 
 void CriaLista(TipoLista *L);
-int Insere(TipoLista *L, TipoItem I);
-int Remove(TipoLista *L, TipoChave C);
+void Insere(TipoLista *L, TipoItem I);
+void Remove(TipoLista *L, TipoChave C);
 TipoApontador  Pesquisa(TipoLista *L, TipoChave C);
 
 char ListaVazia(TipoLista *L);

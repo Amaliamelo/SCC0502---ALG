@@ -1,0 +1,4 @@
+A ordem pode ser de prioridade de acesso
+    - sistema operacional faz muito
+    - usa ponteiro 
+    
