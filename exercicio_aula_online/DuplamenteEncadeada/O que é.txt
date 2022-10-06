@@ -1,0 +1,3 @@
+- A lista possui dois ponteiro, proximo e anterior
+- Consegue ir para frente e para atrás
+- Usada no browser para ir e voltar da pagina
