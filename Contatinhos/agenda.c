@@ -1,38 +1,43 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "Lista.h"
+#include "agenda.h"
 
-void CriaLista(TipoLista *L){
-	(*L).ultimo = NULL;    
-    (*L).primeiro = NULL;
-    printf("Deu certo!\n");
+void CriaAgenda(TipoAgenda *A){
+	A->ultimo = NULL;    
+    A->primeiro = NULL;
+    //printf("Agenda Criada!\n");
 }
 
-void Insere(TipoLista *L, TipoItem I){
-    //Inserção no final
+void InsereContato(TipoAgenda *A, TipoNome N){
+    //Inserção no finalda lista 
 
     TipoApontador p; //criando o ponteiro
     p=(TipoApontador) malloc(sizeof(TipoNo));//
 
     if(p==NULL){// significa problema de memoria cheia
         printf("Memoria Lotada\n");
-        return LISTA_CHEIA;
+        return Agenda_CHEIA;
     }
 
-    p->item = I;
+    //Pesquisar se nome já existe na agenda
+    TipoApontador busca = Pesquisa(A,N);
+
+
+
+    p->contato = C;
     p->prox = NULL;
 
-    if(ListaVazia(L)){
-        L->primeiro = p;
-        L->ultimo = p;
+    if(AgendaVazia(L)){
+        A->primeiro = p;
+        A->ultimo = p;
     }else{
-        L->ultimo->prox = p;
-        L->ultimo = p;
+        A->ultimo->prox = p;
+        A->ultimo = p;
     }
 
 }
 
-static int RemovePosicao(TipoLista *L, TipoApontador p){
+static int RemovePosicao(TipoAgenda *A, TipoApontador p){
     if(p==NULL){
         printf("Posicao Invalida\n");
         return POS_INVALIDA;
@@ -40,7 +45,7 @@ static int RemovePosicao(TipoLista *L, TipoApontador p){
 
     //unico elemento
     if( p==L->primeiro && p == L->ultimo){
-        CriaLista(&p);
+        CriaAgenda(&p);
         free(p);
         return SEM_ERRO;
     }
@@ -70,26 +75,23 @@ static int RemovePosicao(TipoLista *L, TipoApontador p){
     return SEM_ERRO;
 }
 
-void Remove(TipoLista *L, TipoChave C){
-    TipoApontador p = Pesquisa(L,C);
-    int e = RemovePosicao(L,p);
-    if(e==POS_INVALIDA){
-        printf("Invalido\n");
-    }
-    else{
-        printf("Removido com sucesso\n");
+void Remove(TipoAgenda *A, TipoNome N){
+    TipoApontador p = Pesquisa(A,N);
+    int posicao = RemovePosicao(A,p);
+    if(posicao==POS_INVALIDA){
+        printf("Operacao invalida: contatinho nao encontrado\n");
     }
 }
 
 
 
-TipoApontador Pesquisa(TipoLista *L, TipoChave C){
+TipoApontador Pesquisa(TipoAgenda *A, TipoNome N){
     TipoApontador p;
 
-    p = L->primeiro;
+    p = A->primeiro;
 
     while(p!=NULL){
-        if(p->item.chave==C){
+        if(p->contato.nome==N){
             return p;
         }
 
@@ -99,11 +101,11 @@ TipoApontador Pesquisa(TipoLista *L, TipoChave C){
     return p;
 }
 
-char ListaVazia(TipoLista *L){// verificar se o ultimo e o primeiro apontam para null
-    return L->ultimo == NULL && L->primeiro==NULL;
+char AgendaVazia(TipoAgenda *A){// verificar se o ultimo e o primeiro apontam para null
+    return A->ultimo == NULL && A->primeiro==NULL;
 }
 
-void ImprimeLista(TipoLista *L){
+void ImprimeAgenda(TipoAgenda *A){
     TipoApontador p = L->primeiro;
     int i=0;
     while(p != NULL){
