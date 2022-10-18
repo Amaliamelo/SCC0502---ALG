@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "ListaDinamica.h"
+#include "Lista.h"
 
 void CriaLista(TipoLista *L){
 	(*L).ultimo = NULL;    

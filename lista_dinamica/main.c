@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "Lista.h"
+#include "lista.h"
 
 int main() {
     t_lista l;

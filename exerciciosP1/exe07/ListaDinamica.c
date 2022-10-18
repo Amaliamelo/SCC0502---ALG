@@ -123,13 +123,13 @@ void Palindromo(TipoLista *L){
     int i=0, cont=0;
     while(p != NULL){
         if(i==0){
-            if(p==L->ultimo){
+            if(p->item==L->ultimo->item){
                 printf("oi\n");
                 cont++;
             }
         }
         else{
-            if(p==L->ultimo-i){
+            if(p->item==L->ultimo->item-i){
                 printf("oi2\n");
                 cont++;
             }
