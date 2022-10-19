@@ -7,7 +7,7 @@ Typedef char TipoNumero[9];
 
 typedef struct {
     TipoNome nome;
-    TipoNumero Numero;
+    TipoNumero numero;
 }TipoContato;
 
 typedef struct TipoNo *TipoApontador;

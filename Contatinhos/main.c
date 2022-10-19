@@ -1,57 +1,53 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "ListaDinamica.h"
+#include "agenda.h"
 
 
 int main() {    
-    TipoLista L;
-    TipoItem item;
+    TipoAgenda A;
+    TipoContato contato;
     TipoApontador p;
 
-    CriaLista(&L);
+    CriaAgenda(&A);
+	
+    char op;
+    scanf("%s", &op);
+    switch(op){
+        case 'I':
+            scanf("%s", contato.nome);
+            scanf("%s", contato.numero);
+            InsereContato(&A, contato);
+            break; 
+        case 'P':
+            scanf("%s", contato.nome);
+            if(Pesquisa(&A, contato.nome)==NULL){
+                printf("Operacao invalida: contatinho nao encontrado");
+            }
+        break;
+        case 'A':
+            scanf("%s", contato.nome);
+            scanf("%s", contato.numero);
+            if(Pesquisa(&A, contato.nome)==NULL){
+                printf("Operacao invalida: contatinho nao encontrado");
+            }
+            else{
+                
+            }
+        break;
+        case 'R':
+        break;
+        case '0':
+        break;
 
-	printf("Lista vazia? %d\n", ListaVazia(&L));
+    }
 	
-    item.chave = 5;
-    Insere(&L, item);
 
-	item.chave = 1;
-    Insere(&L, item);
-
-	ImprimeLista(&L);
-
-    item.chave = 3;
-    Insere(&L, item);
-	
-    item.chave = 0;
-    Insere(&L, item);
-
-	ImprimeLista(&L);
-	
-	//PesquisaLista(&L, 5);
-	
-    Remove(&L, 3);
-    Remove(&L, 5);
-	
-	ImprimeLista(&L);
-	
-	item.chave = 15;
-    Insere(&L, item);
-	
-	ImprimeLista(&L);
-	
-	Remove(&L, 15);
-	
-	ImprimeLista(&L);
-
-    p=L.primeiro;
-
-    while(p!=NULL){
-        L.primeiro = p->prox;
+    /*while(p!=NULL){
+        A.primeiro = p->prox;
         printf("Limpando\n");
         free(p);
-        p=L.primeiro;
-    }
+        p=A.primeiro;
+    }*/
 
 	return 0;
 }
