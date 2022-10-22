@@ -1,15 +1,15 @@
 CC=gcc
 CFLAGS=-Wall
-objects = main.o ListaDinamica.o
+objects = main.o agenda.o
 
 executa: main
 	./main
 	
-main: ListaDinamica.o main.c
-	$(CC) -o main ListaDinamica.o main.c
+main: agenda.o main.c
+	$(CC) -o main agenda.o main.c
 	
-Lista.o: ListaDinamica.c ListaDinamica.h
-	$(CC) -c ListaDinamica.c
+Lista.o: agenda.c agenda.h
+	$(CC) -c agenda.c
 	
 clean:
 	rm main $(objects)

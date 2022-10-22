@@ -10,31 +10,31 @@ void CriaAgenda(TipoAgenda *A){
 }
 
 void InsereContato(TipoAgenda *A, TipoContato C){
-    //Inserção no finalda lista 
+   // Inserção no finalda lista 
 
-    TipoApontador p; //criando o ponteiro
-    p=(TipoApontador) malloc(sizeof(TipoNo));//
+    TipoApontador novo; //criando o ponteiro
+    novo=(TipoApontador) malloc(sizeof(TipoNo));
 
-    if(p==NULL){// significa problema de memoria cheia
+    if(novo==NULL){ //significa problema de memoria cheia
         printf("Memoria Lotada\n");
         return;
     }
 
-    //Pesquisar se nome já existe na agenda
-    if(Pesquisa(&A,contato.nome)!=NULL){// caso já existe o contato
+   // Pesquisar se nome já existe na agenda
+    if(Pesquisa(&A,C.nome)!=NULL){ //caso já existe o contato
         printf("Contatinho ja inserido");
         return;
     }
     else{
-        p->contato = C;
-        p->prox = NULL;
+        novo->contato = C;
+        novo->prox = NULL;
 
-        if(AgendaVazia(L)){
-            A->primeiro = p;
-            A->ultimo = p;
+        if(AgendaVazia(&A)){
+            A->primeiro = novo;
+            A->ultimo = novo;
         }else{
-            A->ultimo->prox = p;
-            A->ultimo = p;
+            A->ultimo->prox = novo;
+            A->ultimo = novo;
         }
     }
 
@@ -60,7 +60,7 @@ static int RemovePosicao(TipoAgenda *A, TipoApontador p){
        return 0;
     }
 
-    //remove meio
+   // remove meio
     TipoApontador aux = A->primeiro; 
     while(aux->prox != NULL && aux->prox != p){
         aux = aux->prox;
@@ -105,22 +105,32 @@ TipoApontador Pesquisa(TipoAgenda *A, TipoNome N){
     return p;
 }
 
-char AgendaVazia(TipoAgenda *A){// verificar se o ultimo e o primeiro apontam para null
+char AgendaVazia(TipoAgenda *A){ //verificar se o ultimo e o primeiro apontam para null
     return A->ultimo == NULL && A->primeiro==NULL;
 }
 
-void ImprimeAgenda(TipoAgenda *A){
-    TipoApontador p = A->primeiro;
-    int i=0;
-    while(p != NULL){
-        if(p->prox != NULL){
-            printf("%d: Chave = %d, Proximo = %d\n", i, p->contato.nome, p->prox->contato.nome);
-        }
-        else{
-            printf("%d: Chave = %d, Proximo =Nulo\n", i, p->contato.nome);
-        }
-        p=p->prox;
-        i++;
-    }
-}
+
+void AlteraAgenda(TipoAgenda *A, TipoNome N, TipoNumero Numero){
+    TipoApontador p = Pesquisa(&A,N);
+
+    if(p!=NULL)
+        p->contato.numero=Numero;
+        return;
+
+} 
+
+ /*void ImprimeAgenda(TipoAgenda *A){
+     TipoApontador p = A->primeiro;
+     int i=0;
+     while(p != NULL){
+         if(p->prox != NULL){
+             printf("%d: Chave = %d, Proximo = %d\n", i, p->contato.nome, p->prox->contato.nome);
+         }
+         else{
+             printf("%d: Chave = %d, Proximo =Nulo\n", i, p->contato.nome);
+         }
+         p=p->prox;
+         i++;
+     }
+ }*/
 

@@ -2,7 +2,6 @@
 #include<stdlib.h>
 #include "agenda.h"
 
-
 int main() {    
     TipoAgenda A;
     TipoContato contato;
@@ -12,33 +11,40 @@ int main() {
 	
     char op;
     scanf("%s", &op);
-    switch(op){
-        case 'I':
-            scanf("%s", contato.nome);
-            scanf("%s", contato.numero);
-            InsereContato(&A, contato);
-            break; 
-        case 'P':
-            scanf("%s", contato.nome);
-            if(Pesquisa(&A, contato.nome)==NULL){
-                printf("Operacao invalida: contatinho nao encontrado");
-            }
-        break;
-        case 'A':
-            scanf("%s", contato.nome);
-            scanf("%s", contato.numero);
-            if(Pesquisa(&A, contato.nome)==NULL){
-                printf("Operacao invalida: contatinho nao encontrado");
-            }
-            else{
+    while(op!='0'){
+        switch(op){
+            case 'I':
+                scanf("%s", contato.nome);
+                scanf("%d", &contato.numero);
+                InsereContato(&A, contato);
+                break; 
+            case 'P':
+                scanf("%s", contato.nome);
+                if(Pesquisa(&A, contato.nome)==NULL){
+                    printf("Operacao invalida: contatinho nao encontrado");
+                }else Pesquisa(&A, contato.nome);
+            break;
+            case 'A':
+                scanf("%s", contato.nome);
+                scanf("%d", &contato.numero);
                 
-            }
-        break;
-        case 'R':
-        break;
-        case '0':
-        break;
+                if(Pesquisa(&A, contato.nome)==NULL){
+                    printf("Operacao invalida: contatinho nao encontrado");
+                } else AlteraAgenda(&A, contato.nome, contato.numero );
+            break;
+            
+            case 'R':
+                scanf("%s", contato.nome);
+                if(Pesquisa(&A, contato.nome)==NULL){
+                    printf("Operacao invalida: contatinho nao encontrado");
+                } else Remove(&A, contato.nome);
+            break;
+            case '0':
+                exit(0);
+            break;
 
+        }
+        scanf("%s ", &op);
     }
 	
 
