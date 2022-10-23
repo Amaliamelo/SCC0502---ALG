@@ -2,19 +2,19 @@
 #define AGENDA_H
 
 
-typedef char TipoNome;
-typedef int TipoNumero;
+typedef char TipoNome[12];
+typedef long int TipoNumero;
 
 typedef struct {
-    TipoNome nome[10];
+    TipoNome nome;
     TipoNumero numero;
 }TipoContato;
 
 typedef struct TipoNo *TipoApontador;
-
 typedef struct TipoNo {
     TipoContato contato;
-    struct TipoNo *prox;
+    //struct TipoNo *prox;
+    TipoApontador prox;
 } TipoNo;
 
 typedef struct{
@@ -23,7 +23,7 @@ typedef struct{
 
 void CriaAgenda(TipoAgenda *A);
 void InsereContato(TipoAgenda *A, TipoContato C);
-void RemoveContato(TipoAgenda *A, TipoNome N);
+void Remove(TipoAgenda *A, TipoNome N);
 TipoApontador Pesquisa(TipoAgenda *A, TipoNome N);
 char AgendaVazia(TipoAgenda *A);
 void AlteraAgenda(TipoAgenda *A, TipoNome N, TipoNumero Numero);
