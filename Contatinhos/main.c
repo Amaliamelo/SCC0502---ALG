@@ -15,14 +15,16 @@ int main() {
         switch(op){
             case 'I':
                 scanf("%s", contato.nome);
-                scanf("%d", &contato.numero);
+                scanf("%d", contato.numero);
                 InsereContato(&A, contato);
                 break; 
             case 'P':
                 scanf("%s", contato.nome);
                 if(Pesquisa(&A, contato.nome)==NULL){
                     printf("Operacao invalida: contatinho nao encontrado");
-                }else Pesquisa(&A, contato.nome);
+                } else {
+                    printf("Contatinho encontrado: telefone %ld\n", contato.numero);
+                }
             break;
             case 'A':
                 scanf("%s", contato.nome);

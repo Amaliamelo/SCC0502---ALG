@@ -10,9 +10,9 @@ void CriaAgenda(TipoAgenda *A){
 }
 
 void InsereContato(TipoAgenda *A, TipoContato C){
-   // Inserção no finalda lista 
-
-    TipoApontador novo; //criando o ponteiro
+    // Inserção no finalda lista 
+    // Cria um novo contato
+    TipoApontador novo; 
     novo=(TipoApontador) malloc(sizeof(TipoNo));
 
     if(novo==NULL){ //significa problema de memoria cheia
@@ -21,7 +21,7 @@ void InsereContato(TipoAgenda *A, TipoContato C){
     }
 
    // Pesquisar se nome já existe na agenda
-    if(Pesquisa(&A,C.nome)!=NULL){ //caso já existe o contato
+    if(Pesquisa(A,C.nome)!=NULL){ //caso já existe o contato
         printf("Contatinho ja inserido");
         return;
     }
@@ -37,7 +37,6 @@ void InsereContato(TipoAgenda *A, TipoContato C){
             A->ultimo = novo;
         }
     }
-
 }
 
 static int RemovePosicao(TipoAgenda *A, TipoApontador p){
@@ -48,7 +47,7 @@ static int RemovePosicao(TipoAgenda *A, TipoApontador p){
 
     //unico elemento
     if( p==A->primeiro && p == A->ultimo){
-        CriaAgenda(&p);
+        CriaAgenda(p);
         free(p);
         return 0;
     }
@@ -77,9 +76,9 @@ static int RemovePosicao(TipoAgenda *A, TipoApontador p){
     return 0;
 }
 
-void Remove(TipoAgenda *A, TipoNome N){
-    TipoApontador p = Pesquisa(&A,N);
-    int posicao = RemovePosicao(&A,p);
+void Remove(TipoAgenda *A, char N){
+    TipoApontador p = Pesquisa(A,N);
+    int posicao = RemovePosicao(A,p);
     if(posicao==1){
         printf("Operacao invalida: contatinho nao encontrado\n");
         return;
@@ -87,21 +86,19 @@ void Remove(TipoAgenda *A, TipoNome N){
 
 }
 
-
-
 TipoApontador Pesquisa(TipoAgenda *A, TipoNome N){
-    TipoApontador p;
 
+    TipoApontador p;
     p = A->primeiro;
+
+    if(p == NULL) return NULL;
 
     while(p!=NULL){
         if(strcmp(p->contato.nome, N)==0){
             return p;
         }
-
         p=p->prox;
     }
-
     return p;
 }
 
@@ -110,8 +107,8 @@ char AgendaVazia(TipoAgenda *A){ //verificar se o ultimo e o primeiro apontam pa
 }
 
 
-void AlteraAgenda(TipoAgenda *A, TipoNome N, TipoNumero Numero){
-    TipoApontador p = Pesquisa(&A,N);
+void AlteraAgenda(TipoAgenda *A, char N, TipoNumero Numero){
+    TipoApontador p = Pesquisa(A,N);
 
     if(p!=NULL)
         p->contato.numero=Numero;
