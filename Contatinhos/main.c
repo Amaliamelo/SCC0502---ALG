@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
 #include "agenda.h"
 
 int main() {    
@@ -14,7 +16,7 @@ int main() {
     while(op != 0) {
         
         scanf("%s", &op);
-        
+        //toupper(op);
         if (op == '0') break;
         
         switch(op){
