@@ -9,13 +9,17 @@ int main() {
 
     CriaAgenda(&A);
 	
-    char op;
-    scanf("%s", &op);
-    while(op!='0'){
+    char op = '1';
+    while(op != 0) {
+        
+        scanf("%s", &op);
+        
+        if (op == '0') break;
+        
         switch(op){
             case 'I':
                 scanf("%s", contato.nome);
-                scanf("%d", contato.numero);
+                scanf("%ld", &contato.numero);
                 InsereContato(&A, contato);
                 break; 
             case 'P':
@@ -25,15 +29,16 @@ int main() {
                 } else {
                     printf("Contatinho encontrado: telefone %ld\n", contato.numero);
                 }
-            break;
+                break;
+
             case 'A':
                 scanf("%s", contato.nome);
-                scanf("%d", &contato.numero);
+                scanf("%ld", &contato.numero);
                 
                 if(Pesquisa(&A, contato.nome)==NULL){
                     printf("Operacao invalida: contatinho nao encontrado");
                 } else AlteraAgenda(&A, contato.nome, contato.numero );
-            break;
+                break;
             
             case 'R':
                 scanf("%s", contato.nome);
@@ -41,10 +46,9 @@ int main() {
                     printf("Operacao invalida: contatinho nao encontrado");
                 } else Remove(&A, contato.nome);
             break;
-            case '0':
-                exit(0);
-            break;
-
+            
+            default:
+                printf("Operação invalida\n");
         }
         scanf("%s ", &op);
     }
@@ -59,4 +63,3 @@ int main() {
 
 	return 0;
 }
-
