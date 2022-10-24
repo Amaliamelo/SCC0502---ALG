@@ -2,9 +2,11 @@ CC=gcc
 CFLAGS=-Wall
 objects = main.o agenda.o
 
-executa: main
+run: main
 	./main
 	
+all: main
+
 main: agenda.o main.c
 	$(CC) -o main agenda.o main.c
 	

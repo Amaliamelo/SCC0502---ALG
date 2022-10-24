@@ -21,33 +21,42 @@ void InsereContato(TipoAgenda *A, TipoContato C){
     }
 
    // Pesquisar se nome já existe na agenda
-    if(Pesquisa(A,C.nome)!=NULL){ //caso já existe o contato
-        printf("Contatinho ja inserido");
-        return;
-    }
-    else{
-        novo->contato = C;
-        novo->prox = NULL;
-
-        if(AgendaVazia(&A)){
-            A->primeiro = novo;
-            A->ultimo = novo;
-        }else{
-            A->ultimo->prox = novo;
-            A->ultimo = novo;
+    TipoApontador aux = (TipoApontador)malloc(sizeof(TipoNo));
+    aux = A->primeiro;
+    
+    while (aux != NULL){ 
+        if (strcmp(aux->contato.nome, C.nome) == 0){
+            printf("Contatinho ja inserido\n");
+            return;
         }
+        aux = aux->prox;//o aux percorre a lista inteira
     }
+    novo->contato = C;
+    novo->prox = A->primeiro;
+    A->primeiro = novo;
+
+    free(aux);
+    return;
+
+    /* if(AgendaVazia(A)){
+        A->primeiro = novo;
+        A->ultimo = novo;
+    }else{
+        A->ultimo->prox = novo;
+        A->ultimo = novo;
+    } */
 }
 
 static int RemovePosicao(TipoAgenda *A, TipoApontador p){
     if(p==NULL){
-        printf("Operacao invalida: contatinho nao encontrado\n");
+       // printf("Operacao invalida: contatinho nao encontrado\n");
         return 1;
     }
 
-    //unico elemento
+    //unico contato
     if( p==A->primeiro && p == A->ultimo){
-        CriaAgenda(p);
+
+        CriaAgenda(A);
         free(p);
         return 0;
     }
@@ -76,7 +85,7 @@ static int RemovePosicao(TipoAgenda *A, TipoApontador p){
     return 0;
 }
 
-void Remove(TipoAgenda *A, char N){
+void Remove(TipoAgenda *A, TipoNome N){
     TipoApontador p = Pesquisa(A,N);
     int posicao = RemovePosicao(A,p);
     if(posicao==1){
@@ -107,27 +116,30 @@ char AgendaVazia(TipoAgenda *A){ //verificar se o ultimo e o primeiro apontam pa
 }
 
 
-void AlteraAgenda(TipoAgenda *A, char N, TipoNumero Numero){
-    TipoApontador p = Pesquisa(A,N);
+void AlteraAgenda(TipoAgenda *A, TipoContato c){
+    TipoApontador p = Pesquisa(A,c.nome);
 
-    if(p!=NULL)
-        p->contato.numero=Numero;
+    if(p->prox==NULL){
+        printf("Operacao Invalida: contatinho nao encontrado\n");
+    }else { 
+        p->contato.numero=c.numero;
         return;
+    }
 
 } 
 
- /*void ImprimeAgenda(TipoAgenda *A){
+void ImprimeAgenda(TipoAgenda *A){
      TipoApontador p = A->primeiro;
      int i=0;
      while(p != NULL){
          if(p->prox != NULL){
-             printf("%d: Chave = %d, Proximo = %d\n", i, p->contato.nome, p->prox->contato.nome);
+             printf("%d: Numero = %s, Proximo = %s\n", i, p->contato.nome, p->prox->contato.nome);
          }
          else{
-             printf("%d: Chave = %d, Proximo =Nulo\n", i, p->contato.nome);
+             printf("%d: numero = %s, Proximo =Nulo\n", i, p->contato.nome);
          }
          p=p->prox;
          i++;
      }
- }*/
+ }
 

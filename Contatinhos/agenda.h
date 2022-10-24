@@ -26,7 +26,7 @@ void InsereContato(TipoAgenda *A, TipoContato C);
 void Remove(TipoAgenda *A, TipoNome N);
 TipoApontador Pesquisa(TipoAgenda *A, TipoNome N);
 char AgendaVazia(TipoAgenda *A);
-void AlteraAgenda(TipoAgenda *A, TipoNome N, TipoNumero Numero);
+void AlteraAgenda(TipoAgenda *A, TipoContato C);
 
 char AgendaCheia (TipoAgenda *A);
 
