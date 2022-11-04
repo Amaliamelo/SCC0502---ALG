@@ -6,11 +6,11 @@
 void CriaAgenda(TipoAgenda *A){
 	A->ultimo = NULL;    
     A->primeiro = NULL;
-    //printf("Agenda Criada!\n");
+    //Inicializando ponteiros
 }
 
 void InsereContato(TipoAgenda *A, TipoContato C){
-    // Inserção no finalda lista 
+    // Inserção no inicio da lista 
     // Cria um novo contato
     TipoApontador novo; 
     novo=(TipoApontador) malloc(sizeof(TipoNo));
@@ -31,6 +31,8 @@ void InsereContato(TipoAgenda *A, TipoContato C){
         }
         aux = aux->prox;//o aux percorre a lista inteira
     }
+
+    //inserindo novo contato
     novo->contato = C;
     novo->prox = A->primeiro;
     A->primeiro = novo;
@@ -38,18 +40,10 @@ void InsereContato(TipoAgenda *A, TipoContato C){
     free(aux);
     return;
 
-    /* if(AgendaVazia(A)){
-        A->primeiro = novo;
-        A->ultimo = novo;
-    }else{
-        A->ultimo->prox = novo;
-        A->ultimo = novo;
-    } */
 }
 
 static int RemovePosicao(TipoAgenda *A, TipoApontador p){
     if(p==NULL){
-       // printf("Operacao invalida: contatinho nao encontrado\n");
         return 1;
     }
 
@@ -86,8 +80,8 @@ static int RemovePosicao(TipoAgenda *A, TipoApontador p){
 }
 
 void Remove(TipoAgenda *A, TipoNome N){
-    TipoApontador p = Pesquisa(A,N);
-    int posicao = RemovePosicao(A,p);
+    TipoApontador p = Pesquisa(A,N);//Pesquisando nome
+    int posicao = RemovePosicao(A,p);//Pesquisando posição
     if(posicao==1){
         printf("Operacao invalida: contatinho nao encontrado\n");
         return;
@@ -100,9 +94,9 @@ TipoApontador Pesquisa(TipoAgenda *A, TipoNome N){
     TipoApontador p;
     p = A->primeiro;
 
-    if(p == NULL) return NULL;
+    if(p == NULL) return NULL; 
 
-    while(p!=NULL){
+    while(p!=NULL){ //Percorrendo a lista
         if(strcmp(p->contato.nome, N)==0){
             return p;
         }
@@ -119,12 +113,12 @@ char AgendaVazia(TipoAgenda *A){ //verificar se o ultimo e o primeiro apontam pa
 void AlteraAgenda(TipoAgenda *A, TipoContato c){
     TipoApontador p = Pesquisa(A,c.nome);
 
-    if(p->prox==NULL){
+    /*if(p->prox==NULL){
         printf("Operacao Invalida: contatinho nao encontrado\n");
-    }else { 
+    }else { */
         p->contato.numero=c.numero;
         return;
-    }
+    //}
 
 } 
 
